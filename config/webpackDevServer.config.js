@@ -91,6 +91,11 @@ module.exports = function(proxy, allowedHost) {
       ignored: ignoredFiles(paths.appSrc),
     },
     https: getHttpsConfig(),
+    // We need the following header setup for wasm shared array buffer to work. 
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
     host,
     overlay: false,
     historyApiFallback: {

@@ -117,6 +117,7 @@ checkBrowsers(paths.appPath, isInteractive)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
+
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {
@@ -125,7 +126,6 @@ checkBrowsers(paths.appPath, isInteractive)
       if (isInteractive) {
         clearConsole();
       }
-
       // We used to support resolving modules according to `NODE_PATH`.
       // This now has been deprecated in favor of jsconfig/tsconfig.json
       // This lets you use absolute paths in imports inside large monorepos:

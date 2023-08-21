@@ -149,6 +149,7 @@ export default class MainContainer extends React.Component {
   }
 
   render() {
+    console.log("test test test");
     let lastMoveArray = this.state.lastMove ? [this.state.lastMove.from, this.state.lastMove.to] : null
     let snackBarOpen = Boolean(this.state.message)
 

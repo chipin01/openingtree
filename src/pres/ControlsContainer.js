@@ -16,12 +16,13 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faList, faCog, faChartBar, faBook } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faList, faCog, faChartBar, faBook, faRobot } from '@fortawesome/free-solid-svg-icons'
 import MovesList from './moves/MovesList'
 import BookMoves from './moves/BookMoves'
 import {trackEvent} from '../app/Analytics'
 import * as Constants from '../app/Constants'
 import ReportControls from './ReportControls'
+import EngineControls from './EngineControls'
 import { Table, TableRow, TableBody, TableCell } from '@material-ui/core'
 
 export default class ControlsContainer extends React.Component {
@@ -143,6 +144,14 @@ export default class ControlsContainer extends React.Component {
         </NavItem>
         <NavItem>
           <NavLink
+            className={classnames({ active: this.state.activeTab === 'engine' })}
+            onClick={() => { this.toggle('engine'); }}
+          >
+            <FontAwesomeIcon icon={faRobot} /> {this.state.activeTab === 'engine'?"Engine":""}
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
             className={classnames({ active: this.state.activeTab === 'settings' })}
             onClick={() => { this.toggle('settings'); }}
           >
@@ -208,6 +217,14 @@ export default class ControlsContainer extends React.Component {
             launchGame={this.launchGame.bind(this)} settings={this.props.settings}
             switchToUserTab={this.switchToUserTab.bind(this)}
             isOpen = {this.state.activeTab === "report"}
+            showInfo = {this.props.showInfo} reportFooter={this.reportFooter()}/>
+        </TabPane>
+        <TabPane tabId="engine">
+          <EngineControls fen={this.props.fen} simplifiedView = {false}
+            moveDetails = {this.props.openingGraph.getDetailsForFen(this.props.fen)}
+            launchGame={this.launchGame.bind(this)} settings={this.props.settings}
+            switchToUserTab={this.switchToUserTab.bind(this)}
+            isOpen = {this.state.activeTab === "engine"}
             showInfo = {this.props.showInfo} reportFooter={this.reportFooter()}/>
         </TabPane>
         <TabPane tabId="settings">
