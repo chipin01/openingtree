@@ -22,6 +22,7 @@ export default class EngineControls extends React.Component {
             movePromotion: '',
             isEngineRunning: false,
         };
+        
         this.engine = new Worker('stockfish-nnue-16.js#stockfish-nnue-16.wasm');
         this.evaler = new Worker('stockfish-nnue-16.js#stockfish-nnue-16.wasm');
 
